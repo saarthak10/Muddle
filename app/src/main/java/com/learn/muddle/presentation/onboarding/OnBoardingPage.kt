@@ -8,7 +8,7 @@ data class OnBoardingPage(
     val description:String,
     @DrawableRes val image:Int
 )
-val pages = listOf(
+val onBoardingPages = listOf(
 
     OnBoardingPage(
         title = "Manage Goals",
