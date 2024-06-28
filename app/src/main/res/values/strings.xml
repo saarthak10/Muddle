@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Muddle</string>
+    <string name="str_text_welcome_to_muddle">Welcome to Muddle</string>
+    <string name="str_feature_text">Use all the linear features on the go</string>
+    <string name="str_feature_text_first">View, edit and create issues.</string>
+    <string name="str_feature_text_second">Plan Cycles and Projects</string>
+    <string name="str_feature_text_third">Access Active issues and backlogs</string>
+
 </resources>

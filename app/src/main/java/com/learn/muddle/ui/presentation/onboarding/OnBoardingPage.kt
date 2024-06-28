@@ -1,4 +1,4 @@
-package com.learn.muddle.presentation.onboarding
+package com.learn.muddle.ui.presentation.onboarding
 
 import androidx.annotation.DrawableRes
 import com.learn.muddle.R

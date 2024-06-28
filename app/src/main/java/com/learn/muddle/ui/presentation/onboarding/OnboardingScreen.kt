@@ -1,4 +1,4 @@
-package com.learn.muddle.presentation.onboarding
+package com.learn.muddle.ui.presentation.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,10 +30,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.learn.muddle.ui.navigation.Screens
 import com.learn.muddle.ui.theme.MuddleTheme
 
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(navigateTo: (route:String)->Unit) {
 
     val onBoardingPages = onBoardingPages
     val currentPage = remember {
@@ -64,7 +65,8 @@ fun OnboardingScreen() {
             totalPages = onBoardingPages.size,
             onNextClicked = {
                 currentPage.value++
-            }
+            },
+            navigateTo
         )
 
         TabSelector(pages = onBoardingPages, currentPage = currentPage.value) {
@@ -112,7 +114,7 @@ fun OnBoardingDetails(modifier: Modifier, page: OnBoardingPage) {
 
         Text(
             text = page.title,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
@@ -120,7 +122,7 @@ fun OnBoardingDetails(modifier: Modifier, page: OnBoardingPage) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = page.description,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
         )
@@ -135,7 +137,8 @@ fun onBoardNavButton(
     modifier: Modifier,
     currentPage: Int,
     totalPages: Int,
-    onNextClicked: () -> Unit
+    onNextClicked: () -> Unit,
+    navigateTo: (route: String) -> Unit
 ) {
 
     Button(onClick = {
@@ -143,6 +146,7 @@ fun onBoardNavButton(
             onNextClicked()
         } else {
             // handle Onboarding completion
+            navigateTo(Screens.LoginScreen.route)
         }
 
     }, modifier = modifier) {
@@ -188,6 +192,6 @@ fun TabSelector(pages: List<OnBoardingPage>, currentPage: Int, onTabSelected: (I
 @Composable
 fun OnboardingScreenPreview() {
     MuddleTheme {
-        OnboardingScreen()
+       //  OnboardingScreen()
     }
 }

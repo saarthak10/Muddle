@@ -11,8 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.learn.muddle.presentation.onboarding.OnboardingScreen
+import com.learn.muddle.ui.navigation.RootHost
+import com.learn.muddle.ui.navigation.Screens
+import com.learn.muddle.ui.presentation.onboarding.OnboardingScreen
 import com.learn.muddle.ui.theme.MuddleTheme
+import com.learn.muddle.ui.theme.Typography
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,15 +24,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-             MuddleTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    OnboardingScreen()
+                MaterialTheme(typography = Typography){
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        RootHost()
+                    }
                 }
-            }
+
+
         }
     }
 }

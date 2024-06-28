@@ -68,5 +68,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.dagger.hilt)
     implementation(libs.splash)
+    implementation(libs.navgraph)
 
 }

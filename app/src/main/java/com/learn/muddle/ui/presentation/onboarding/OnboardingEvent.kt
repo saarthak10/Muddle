@@ -1,4 +1,4 @@
-package com.learn.muddle.presentation.onboarding
+package com.learn.muddle.ui.presentation.onboarding
 
 sealed class OnboardingEvent {
 
