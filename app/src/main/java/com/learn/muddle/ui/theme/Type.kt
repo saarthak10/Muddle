@@ -11,7 +11,8 @@ import com.learn.muddle.R
 val FontFamilyLexend  = FontFamily(
     Font(R.font.lexend_bold, FontWeight.Bold),
     Font(R.font.lexend_regular, FontWeight.Normal),
-    Font(R.font.lexend_semibold, FontWeight.SemiBold)
+    Font(R.font.lexend_semibold, FontWeight.SemiBold),
+    Font(R.font.lexend_thin, FontWeight.Thin)
 )
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -42,7 +43,16 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = FontFamilyLexend,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
     )
+
+
         /* Other default text styles to override
         titleLarge = TextStyle(
             fontFamily = FontFamily.Default,
