@@ -1,4 +1,4 @@
-package com.learn.muddle.ui.presentation.components.textfields
+package com.learn.muddle.ui.components.textfields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,7 +24,7 @@ import com.learn.muddle.R
 import com.learn.muddle.utils.Utils
 
 @Composable
-fun EmailTextField(
+fun PasswordTextField(
     name: String,
     placeHolder: String,
     value: String,
@@ -47,22 +47,18 @@ fun EmailTextField(
             unfocusedTextColor = Color.Black,
             unfocusedBorderColor = Color.LightGray,
             unfocusedLabelColor = Color.Gray,
-            focusedLeadingIconColor = MaterialTheme.colorScheme.primary
+            focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
+            errorLeadingIconColor = MaterialTheme.colorScheme.error
+
         ),
-        leadingIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_email),
-                contentDescription = null,
-                modifier = Modifier
-                    .width(20.dp)
-                    .height(20.dp)
-            )
-        },
+        leadingIcon = { Icon(painter = painterResource(id = R.drawable.ic_lock ), contentDescription = null, modifier = Modifier
+            .width(20.dp)
+            .height(20.dp))},
         shape = RoundedCornerShape(10.dp),
         label = { Text(text = name, style = MaterialTheme.typography.labelMedium) },
         placeholder = { placeHolder },
         textStyle = MaterialTheme.typography.labelMedium,
-        isError = text.isNotEmpty() && !Utils.isValidEmail(text)
+        isError = text.isNotEmpty() && !Utils.isValidPassword(text)
     )
 
 }
@@ -70,9 +66,9 @@ fun EmailTextField(
 
 @Preview
 @Composable
-fun previewCommonTextField() {
+fun PreviewPasswordTextField() {
 
-    EmailTextField(name = "Email", placeHolder = "Enter Email", value = "", onValueChange = {})
+    PasswordTextField(name = "Password", placeHolder = "Enter Password", value = "", onValueChange = {})
 
 }
 

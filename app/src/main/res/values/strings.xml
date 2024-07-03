@@ -5,5 +5,11 @@
     <string name="str_feature_text_first">View, edit and create issues.</string>
     <string name="str_feature_text_second">Plan Cycles and Projects</string>
     <string name="str_feature_text_third">Access Active issues and backlogs</string>
-
+    <string name="str_err_password_required">Password is required.</string>
+    <string name= "str_err_password_uppercase">Password must contain at least one uppercase letter.</string>
+    <string name= "str_err_password_lowercase">Password must contain at least one lowercase letter.</string>
+    <string name="str_err_password_digit">Password must contain at least one digit.</string>
+    <string name="str_err_password_special">Password must contain at least one special character.</string>
+    <string name="str_err_password_length">Password must be at least 8 characters long.</string>
+    <string name="str_no_error">No error</string>
 </resources>

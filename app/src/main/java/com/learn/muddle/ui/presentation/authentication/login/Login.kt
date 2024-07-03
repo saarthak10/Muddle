@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -24,10 +25,16 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.learn.muddle.R
-import com.learn.muddle.ui.presentation.components.textfields.EmailTextField
-import com.learn.muddle.ui.presentation.components.textfields.PasswordTextField
+import com.learn.muddle.ui.components.textfields.EmailTextField
+import com.learn.muddle.ui.components.textfields.PasswordTextField
+import com.learn.muddle.ui.navigation.Screens
 
 
 @Composable
@@ -39,6 +46,25 @@ fun Login(navigateTo: (route: String) -> Unit) {
 
     val password = remember {
         mutableStateOf("")
+    }
+
+    val annotatedStringSignUp = buildAnnotatedString {
+        append("Already have an account?")
+        pushStringAnnotation(tag = "SignUp", annotation = "SignUp")
+        withStyle(style = SpanStyle(color = Color.Blue)) {
+            append(" Sign Up")
+        }
+        pop()
+    }
+
+    val annotatedStringForgotPassword = buildAnnotatedString {
+
+        append("Forgot Password?")
+        pushStringAnnotation(tag = "ForgotPassword", annotation = "ForgotPassword")
+        withStyle(style = SpanStyle(Color.Blue)) {
+            append(" Click here")
+        }
+        pop()
     }
 
     Column(
@@ -154,6 +180,7 @@ fun Login(navigateTo: (route: String) -> Unit) {
 
         ) {
 
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -179,15 +206,57 @@ fun Login(navigateTo: (route: String) -> Unit) {
                     onValueChange = { password.value = it })
 
                 Spacer(modifier = Modifier.padding(20.dp))
-                Button(onClick = {
-                // handle login click
+                Button(
+                    onClick = {
+                        // handle login click
 
-                 },
+                    },
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     shape = RoundedCornerShape(10.dp),
                 ) {
                     Text(text = "Login", style = MaterialTheme.typography.titleMedium)
                 }
+                Spacer(modifier = Modifier.padding(10.dp))
+
+                ClickableText(
+                    text = annotatedStringForgotPassword,
+                    onClick = { offset ->
+                        annotatedStringSignUp.getStringAnnotations(
+                            tag = "ForgotPassword",
+                            start = offset,
+                            end = offset
+                        )
+                            .firstOrNull()?.let {
+                               // navigateTo(Screens.SignUpScreen.route)
+                            }
+                    },
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontSize = 16.sp
+                    ),
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.padding(3.dp))
+
+                ClickableText(
+                    text = annotatedStringSignUp,
+                    onClick = { offset ->
+                        annotatedStringSignUp.getStringAnnotations(
+                            tag = "SignUp",
+                            start = offset,
+                            end = offset
+                        )
+                            .firstOrNull()?.let {
+                                navigateTo(Screens.SignUpScreen.route)
+                            }
+                    },
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontSize = 16.sp
+                    ),
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.padding(10.dp))
             }
 
 

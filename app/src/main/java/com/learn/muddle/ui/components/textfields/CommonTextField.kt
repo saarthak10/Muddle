@@ -1,4 +1,4 @@
-package com.learn.muddle.ui.presentation.components.textfields
+package com.learn.muddle.ui.components.textfields
 
 import androidx.compose.runtime.Composable
 

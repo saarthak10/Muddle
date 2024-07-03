@@ -23,7 +23,7 @@ val onBoardingPages = listOf(
     OnBoardingPage(
         title = "Assign your work",
         description = "Make your list easily and quickly facilitate your work.",
-        image = R.drawable.onboarding_second
+        image = R.drawable.onboarding_third
     )
 )
 
