@@ -69,5 +69,8 @@ dependencies {
     implementation(libs.dagger.hilt)
     implementation(libs.splash)
     implementation(libs.navgraph)
+    implementation(libs.room)
+    implementation(libs.appwrite)
+
 
 }

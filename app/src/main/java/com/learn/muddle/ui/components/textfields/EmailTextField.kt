@@ -18,10 +18,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.learn.muddle.R
-import com.learn.muddle.utils.Utils
+import com.learn.muddle.core.utils.Utils
 
 @Composable
 fun EmailTextField(
@@ -33,7 +34,9 @@ fun EmailTextField(
     var text by remember {
         mutableStateOf(value)
     }
-
+    var errorMessage  = remember {
+        mutableStateOf("")
+    }
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
@@ -62,7 +65,8 @@ fun EmailTextField(
         label = { Text(text = name, style = MaterialTheme.typography.labelMedium) },
         placeholder = { placeHolder },
         textStyle = MaterialTheme.typography.labelMedium,
-        isError = text.isNotEmpty() && !Utils.isValidEmail(text)
+        isError = text.isNotEmpty() && !Utils.isValidEmail(text),
+
     )
 
 }

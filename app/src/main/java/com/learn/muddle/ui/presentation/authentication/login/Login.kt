@@ -5,13 +5,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +36,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.learn.muddle.R
+import com.learn.muddle.data.ErrorValueModel
+import com.learn.muddle.ui.components.textfields.CommonTextField
 import com.learn.muddle.ui.components.textfields.EmailTextField
 import com.learn.muddle.ui.components.textfields.PasswordTextField
 import com.learn.muddle.ui.navigation.Screens
@@ -40,6 +46,9 @@ import com.learn.muddle.ui.navigation.Screens
 @Composable
 fun Login(navigateTo: (route: String) -> Unit) {
 
+    val userName = remember {
+        mutableStateOf("")
+    }
     val userEmail = remember {
         mutableStateOf("")
     }
@@ -69,6 +78,8 @@ fun Login(navigateTo: (route: String) -> Unit) {
 
     Column(
         modifier = Modifier.fillMaxSize()
+            .verticalScroll(rememberScrollState())
+
     ) {
         //region Welcome
         Image(
@@ -174,23 +185,35 @@ fun Login(navigateTo: (route: String) -> Unit) {
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .padding(20.dp)
-                .fillMaxWidth()
+                .fillMaxSize()
                 .shadow(elevation = 10.dp)
-
-
+                .fillMaxHeight()
         ) {
-
 
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .align(Alignment.CenterHorizontally)
                     .background(Color.White)
-                    .padding(10.dp)
+                    .padding(20.dp)
 
             ) {
+                
+                Text(
+                    text = stringResource(R.string.str_lable_login_signup),
+                    modifier = Modifier.padding(top = 5.dp),
+                    style = MaterialTheme.typography.titleMedium
+                )
 
                 Spacer(modifier = Modifier.padding(15.dp))
+                CommonTextField(
+                    name = "Username",
+                    placeHolder = "Enter Username (optional)",
+                    value = userName.value,
+                    onValueChange = {userName.value = it}
+                )
+
+                Spacer(modifier = Modifier.padding(10.dp))
 
                 EmailTextField(
                     name = "Email",
@@ -198,14 +221,16 @@ fun Login(navigateTo: (route: String) -> Unit) {
                     value = userEmail.value,
                     onValueChange = { userEmail.value = it })
 
-                Spacer(modifier = Modifier.padding(20.dp))
+                Spacer(modifier = Modifier.padding(10.dp))
                 PasswordTextField(
                     name = "Password",
                     placeHolder = "Enter Password",
                     value = password.value,
-                    onValueChange = { password.value = it })
+                    onValueChange = { ErrorValueModel(value = it, error = "") },
 
-                Spacer(modifier = Modifier.padding(20.dp))
+                    )
+
+                Spacer(modifier = Modifier.padding(12.dp))
                 Button(
                     onClick = {
                         // handle login click
@@ -216,7 +241,7 @@ fun Login(navigateTo: (route: String) -> Unit) {
                 ) {
                     Text(text = "Login", style = MaterialTheme.typography.titleMedium)
                 }
-                Spacer(modifier = Modifier.padding(10.dp))
+                Spacer(modifier = Modifier.padding(8.dp))
 
                 ClickableText(
                     text = annotatedStringForgotPassword,
@@ -227,7 +252,7 @@ fun Login(navigateTo: (route: String) -> Unit) {
                             end = offset
                         )
                             .firstOrNull()?.let {
-                               // navigateTo(Screens.SignUpScreen.route)
+                                // navigateTo(Screens.SignUpScreen.route)
                             }
                     },
                     style = TextStyle(
@@ -238,25 +263,6 @@ fun Login(navigateTo: (route: String) -> Unit) {
                 )
                 Spacer(modifier = Modifier.padding(3.dp))
 
-                ClickableText(
-                    text = annotatedStringSignUp,
-                    onClick = { offset ->
-                        annotatedStringSignUp.getStringAnnotations(
-                            tag = "SignUp",
-                            start = offset,
-                            end = offset
-                        )
-                            .firstOrNull()?.let {
-                                navigateTo(Screens.SignUpScreen.route)
-                            }
-                    },
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontSize = 16.sp
-                    ),
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-                Spacer(modifier = Modifier.padding(10.dp))
             }
 
 

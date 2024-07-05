@@ -12,4 +12,5 @@
     <string name="str_err_password_special">Password must contain at least one special character.</string>
     <string name="str_err_password_length">Password must be at least 8 characters long.</string>
     <string name="str_no_error">No error</string>
+    <string name="str_lable_login_signup">Login/SignUp</string>
 </resources>

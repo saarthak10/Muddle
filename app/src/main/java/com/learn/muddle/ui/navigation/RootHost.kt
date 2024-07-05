@@ -17,8 +17,6 @@ fun RootHost(){
             OnboardingScreen{
                 navController.navigate(it)
             }
-
-
         }
 
         composable(route = Screens.LoginScreen.route){
