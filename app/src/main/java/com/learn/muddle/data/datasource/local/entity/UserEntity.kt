@@ -1,4 +1,4 @@
-package com.learn.muddle.data.local.entity
+package com.learn.muddle.data.datasource.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

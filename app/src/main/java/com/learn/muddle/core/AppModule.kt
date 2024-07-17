@@ -12,17 +12,5 @@ import dagger.hilt.components.SingletonComponent
 @Module
 object AppModule {
 
-    fun provideAppDatabase(app:Application):UserDatabase{
-        return Room.databaseBuilder(
-            app,
-            UserDatabase::class.java,
-            "User Database"
-        ).build()
-    }
-
-    fun provideResources(context: Context):Resources{
-        return context.resources
-    }
-
 
 }

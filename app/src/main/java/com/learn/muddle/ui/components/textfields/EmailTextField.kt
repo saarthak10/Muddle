@@ -29,7 +29,8 @@ fun EmailTextField(
     name: String,
     placeHolder: String,
     value: String,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    onErrorChange: (Boolean) -> Unit
 ) {
     var text by remember {
         mutableStateOf(value)
@@ -44,7 +45,12 @@ fun EmailTextField(
         value = value,
         onValueChange = {
             text = it
-            onValueChange(it)
+            if (Utils.isValidEmail(text)){
+
+                onValueChange(it)
+            }else{
+                onErrorChange(Utils.isValidEmail(text))
+            }
         },
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedTextColor = Color.Black,
@@ -76,7 +82,7 @@ fun EmailTextField(
 @Composable
 fun previewCommonTextField() {
 
-    EmailTextField(name = "Email", placeHolder = "Enter Email", value = "", onValueChange = {})
+    EmailTextField(name = "Email", placeHolder = "Enter Email", value = "", onValueChange = {}, onErrorChange = {})
 
 }
 

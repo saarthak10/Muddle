@@ -1,10 +1,10 @@
-package com.learn.muddle.data.local
+package com.learn.muddle.data.datasource.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.learn.muddle.data.local.entity.UserEntity
+import com.learn.muddle.data.datasource.local.entity.UserEntity
 
 @Dao
 interface LoginDao {

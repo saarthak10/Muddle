@@ -2,7 +2,6 @@ package com.learn.muddle.ui.components.textfields
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,17 +25,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.room.util.TableInfo
 import com.learn.muddle.R
 import com.learn.muddle.core.utils.Utils
-import com.learn.muddle.data.ErrorValueModel
 
 @Composable
 fun PasswordTextField(
     name: String,
     placeHolder: String,
     value: String,
-    onValueChange: (String) -> ErrorValueModel,
+    onValueChange: (String) -> Unit,
+    onErrorChange: (Int) -> Unit
 ) {
     var text by remember {
         mutableStateOf(value)
@@ -45,8 +43,7 @@ fun PasswordTextField(
 
     var errorMessage by remember { mutableStateOf("") }
 
-    errorMessage = if (errorCode != 0 ){
-        stringResource(id = errorCode)
+    errorMessage = if (errorCode != 0 ){ stringResource(id = errorCode)
     }else ""
 
         OutlinedTextField(
@@ -56,10 +53,13 @@ fun PasswordTextField(
             value = value,
             onValueChange = {
                 text = it
-                onValueChange(it)
                 errorCode = Utils.isValidPassword(it)
-                println(errorCode)
-                print("String Resource===>")
+                if(errorCode == R.string.str_no_error){
+                    onValueChange(it)
+                }else{
+                    onErrorChange(errorCode)
+                }
+
             },
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedTextColor = Color.Black,
@@ -67,7 +67,6 @@ fun PasswordTextField(
                 unfocusedLabelColor = Color.Gray,
                 focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
                 errorLeadingIconColor = MaterialTheme.colorScheme.error
-
             ),
             leadingIcon = {
                 Icon(
@@ -110,7 +109,7 @@ fun PreviewPasswordTextField() {
         name = "Password",
         placeHolder = "Enter Password",
         value = "",
-        onValueChange = {})
+        onValueChange = { ErrorValueModel(value = " ", error = "") }, onErrorChange = {})
 
 }
 

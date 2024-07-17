@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -36,11 +34,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.learn.muddle.R
-import com.learn.muddle.data.ErrorValueModel
 import com.learn.muddle.ui.components.textfields.CommonTextField
 import com.learn.muddle.ui.components.textfields.EmailTextField
 import com.learn.muddle.ui.components.textfields.PasswordTextField
-import com.learn.muddle.ui.navigation.Screens
 
 
 @Composable
@@ -57,6 +53,14 @@ fun Login(navigateTo: (route: String) -> Unit) {
         mutableStateOf("")
     }
 
+    val emailError = remember {
+        mutableStateOf(false)
+    }
+    val passwordError = remember {
+        mutableStateOf(0)
+    }
+
+    // region annotated string
     val annotatedStringSignUp = buildAnnotatedString {
         append("Already have an account?")
         pushStringAnnotation(tag = "SignUp", annotation = "SignUp")
@@ -75,9 +79,11 @@ fun Login(navigateTo: (route: String) -> Unit) {
         }
         pop()
     }
+    //endregion
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .verticalScroll(rememberScrollState())
 
     ) {
@@ -210,7 +216,9 @@ fun Login(navigateTo: (route: String) -> Unit) {
                     name = "Username",
                     placeHolder = "Enter Username (optional)",
                     value = userName.value,
-                    onValueChange = {userName.value = it}
+                    onValueChange = {
+
+                    }
                 )
 
                 Spacer(modifier = Modifier.padding(10.dp))
@@ -219,21 +227,26 @@ fun Login(navigateTo: (route: String) -> Unit) {
                     name = "Email",
                     placeHolder = "Enter Email",
                     value = userEmail.value,
-                    onValueChange = { userEmail.value = it })
+                    onValueChange = { userEmail.value = it },
+                    onErrorChange = { emailError.value = it}
+                )
 
                 Spacer(modifier = Modifier.padding(10.dp))
                 PasswordTextField(
                     name = "Password",
                     placeHolder = "Enter Password",
                     value = password.value,
-                    onValueChange = { ErrorValueModel(value = it, error = "") },
-
+                    onValueChange = { password.value = it },
+                    onErrorChange = {
+                        passwordError.value = it
+                    }
                     )
 
                 Spacer(modifier = Modifier.padding(12.dp))
                 Button(
                     onClick = {
                         // handle login click
+                        handleLoginClick()
 
                     },
                     modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -262,15 +275,19 @@ fun Login(navigateTo: (route: String) -> Unit) {
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
                 Spacer(modifier = Modifier.padding(3.dp))
-
             }
-
-
         }
         //endregion
-
-
     }
+
+
+}
+
+fun handleLoginClick() {
+    // check for validations
+    // call view model for login
+    // check whether this user exists already in appwrite or not
+    // if new user create new user else login
 
 
 }
