@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.learn.muddle.ui.navigation.RootHost
 import com.learn.muddle.ui.navigation.Screens
+import com.learn.muddle.ui.presentation.authentication.login.LoginViewModel
 import com.learn.muddle.ui.presentation.onboarding.OnboardingScreen
 import com.learn.muddle.ui.theme.MuddleTheme
 import com.learn.muddle.ui.theme.Typography
@@ -20,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()

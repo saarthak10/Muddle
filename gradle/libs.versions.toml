@@ -13,6 +13,7 @@ splash = "1.0.1"
 nav = "2.7.7"
 room = "2.6.1"
 appwrite = "5.1.0"
+hiltNavigation = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,8 @@ navgraph = { group = "androidx.navigation", name = "navigation-compose", version
 room = { group= "androidx.room", name = "room-runtime", version.ref= "room"}
 room-compiler = {group= "androidx.room", name = "room-compiler", version.ref = "room" }
 appwrite = {group = "io.appwrite", name ="sdk-for-android", version.ref = "appwrite"}
+# Hilt Navigation Compose
+navigationcompose = { group = "androidx.hilt", name="navigation-compose", version.ref = "hiltNavigation"}
 
 
 

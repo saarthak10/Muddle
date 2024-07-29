@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.navgraph)
     implementation(libs.room)
     implementation(libs.appwrite)
+    implementation(libs.navigationcompose)
 
 
 }

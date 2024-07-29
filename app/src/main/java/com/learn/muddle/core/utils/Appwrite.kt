@@ -5,13 +5,13 @@ import io.appwrite.Client
 import io.appwrite.ID
 import io.appwrite.models.*
 import io.appwrite.services.*
-object Appwrite {
+class Appwrite(private val context: Context) {
 
     lateinit var client: Client
     lateinit var account: Account
 
-    fun init(context: Context) {
-        client = Client(context)
+    fun init() {
+        client = Client(context = context )
             .setEndpoint("https://cloud.appwrite.io/v1")
             .setProject("668689ac003cf669193d")
 

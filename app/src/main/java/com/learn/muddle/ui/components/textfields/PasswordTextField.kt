@@ -43,59 +43,60 @@ fun PasswordTextField(
 
     var errorMessage by remember { mutableStateOf("") }
 
-    errorMessage = if (errorCode != 0 ){ stringResource(id = errorCode)
-    }else ""
+    errorMessage = if (errorCode != 0) {
+        stringResource(id = errorCode)
+    } else ""
 
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White),
-            value = value,
-            onValueChange = {
-                text = it
-                errorCode = Utils.isValidPassword(it)
-                if(errorCode == R.string.str_no_error){
-                    onValueChange(it)
-                }else{
-                    onErrorChange(errorCode)
-                }
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White),
+        value = value,
+        onValueChange = {
+            text = it
+            errorCode = Utils.isValidPassword(it)
+            if (errorCode == R.string.str_no_error) {
+                onValueChange(it)
+            } else {
+                onErrorChange(errorCode)
+            }
 
-            },
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedTextColor = Color.Black,
-                unfocusedBorderColor = Color.LightGray,
-                unfocusedLabelColor = Color.Gray,
-                focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
-                errorLeadingIconColor = MaterialTheme.colorScheme.error
-            ),
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_lock),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .width(20.dp)
-                        .height(20.dp)
-                )
-            },
-            shape = RoundedCornerShape(10.dp),
-            label = { Text(text = name, style = MaterialTheme.typography.labelMedium) },
-            placeholder = { placeHolder },
-            textStyle = MaterialTheme.typography.labelMedium,
-            visualTransformation = PasswordVisualTransformation(),
-            isError = errorMessage.isNotEmpty() && errorMessage != "No error",
-
+        },
+        colors = OutlinedTextFieldDefaults.colors(
+            unfocusedTextColor = Color.Black,
+            unfocusedBorderColor = Color.LightGray,
+            unfocusedLabelColor = Color.Gray,
+            focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
+            errorLeadingIconColor = MaterialTheme.colorScheme.error
+        ),
+        leadingIcon = {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_lock),
+                contentDescription = null,
+                modifier = Modifier
+                    .width(20.dp)
+                    .height(20.dp)
             )
-        Spacer(modifier = Modifier.padding(5.dp))
-        if (errorMessage.isNotEmpty() && errorMessage != "No error" ) {
-            Log.d( "Error message", errorMessage)
-            Text(
-                text = errorMessage,
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall
-            )
-        }else{
+        },
+        shape = RoundedCornerShape(10.dp),
+        label = { Text(text = name, style = MaterialTheme.typography.labelMedium) },
+        placeholder = { placeHolder },
+        textStyle = MaterialTheme.typography.labelMedium,
+        visualTransformation = PasswordVisualTransformation(),
+        isError = errorMessage.isNotEmpty() && errorMessage != "No error",
 
-        }
+        )
+    Spacer(modifier = Modifier.padding(5.dp))
+    if (errorMessage.isNotEmpty() && errorMessage != "No error") {
+        Log.d("Error message", errorMessage)
+        Text(
+            text = errorMessage,
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.bodySmall
+        )
+    } else {
+
+    }
 
 
 }
@@ -109,7 +110,7 @@ fun PreviewPasswordTextField() {
         name = "Password",
         placeHolder = "Enter Password",
         value = "",
-        onValueChange = { ErrorValueModel(value = " ", error = "") }, onErrorChange = {})
+        onValueChange = { }, onErrorChange = {})
 
 }
 

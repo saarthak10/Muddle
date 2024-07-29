@@ -33,14 +33,18 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.learn.muddle.R
+import com.learn.muddle.domain.model.UserModel
 import com.learn.muddle.ui.components.textfields.CommonTextField
 import com.learn.muddle.ui.components.textfields.EmailTextField
 import com.learn.muddle.ui.components.textfields.PasswordTextField
+import javax.inject.Inject
 
 
 @Composable
 fun Login(navigateTo: (route: String) -> Unit) {
+
 
     val userName = remember {
         mutableStateOf("")
@@ -80,6 +84,26 @@ fun Login(navigateTo: (route: String) -> Unit) {
         pop()
     }
     //endregion
+    //region handle Login Click
+    fun handleLoginClick() {
+        // check for validations
+        if (!emailError.value && passwordError.value == 0){
+            var userModel = UserModel(
+                email = userEmail.value,
+                password = password.value,
+                username = userName.value
+            )
+
+
+        }
+        // call view model for login
+        // check whether this user exists already in appwrite or not
+        // if new user create new user else login
+
+
+    }
+    //endregion
+
 
     Column(
         modifier = Modifier
@@ -283,11 +307,4 @@ fun Login(navigateTo: (route: String) -> Unit) {
 
 }
 
-fun handleLoginClick() {
-    // check for validations
-    // call view model for login
-    // check whether this user exists already in appwrite or not
-    // if new user create new user else login
 
-
-}

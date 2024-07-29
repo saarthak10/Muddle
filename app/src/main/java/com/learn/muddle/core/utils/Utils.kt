@@ -17,7 +17,7 @@ object Utils {
         val specialCharRegExp = Regex("(?=.*?[#?!@$%^&*-])")
         val minLengthRegExp = Regex(".{8,}")
         return when {
-            !minLengthRegExp.containsMatchIn(password) -> R.string.str_err_password_length
+//            !minLengthRegExp.containsMatchIn(password) -> R.string.str_err_password_length
             !lowercaseRegExp.containsMatchIn(password) -> R.string.str_err_password_lowercase
             !uppercaseRegExp.containsMatchIn(password) -> R.string.str_err_password_uppercase
             !digitsRegExp.containsMatchIn(password) -> R.string.str_err_password_digit
