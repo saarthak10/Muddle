@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -45,6 +46,7 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/gradle/incremental.annotation.processors"
         }
     }
 }
@@ -67,11 +69,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.dagger.hilt)
+    implementation(libs.dagger.hilt.compiler)
     implementation(libs.splash)
     implementation(libs.navgraph)
-    implementation(libs.room)
-    implementation(libs.appwrite)
-    implementation(libs.navigationcompose)
-
+    implementation(libs.hilt.navigation)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 
 }

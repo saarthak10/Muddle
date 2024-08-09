@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -33,17 +34,16 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.learn.muddle.R
 import com.learn.muddle.domain.model.UserModel
 import com.learn.muddle.ui.components.textfields.CommonTextField
 import com.learn.muddle.ui.components.textfields.EmailTextField
 import com.learn.muddle.ui.components.textfields.PasswordTextField
-import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 
 @Composable
-fun Login(navigateTo: (route: String) -> Unit) {
+fun Login( viewModel: LoginViewModel,navigateTo: (route: String) -> Unit) {
 
 
     val userName = remember {
@@ -64,6 +64,8 @@ fun Login(navigateTo: (route: String) -> Unit) {
         mutableStateOf(0)
     }
 
+    val coroutineScope = rememberCoroutineScope()
+
     // region annotated string
     val annotatedStringSignUp = buildAnnotatedString {
         append("Already have an account?")
@@ -83,11 +85,12 @@ fun Login(navigateTo: (route: String) -> Unit) {
         }
         pop()
     }
+
     //endregion
     //region handle Login Click
     fun handleLoginClick() {
         // check for validations
-        if (!emailError.value && passwordError.value == 0){
+        if (!emailError.value && passwordError.value == 0) {
             var userModel = UserModel(
                 email = userEmail.value,
                 password = password.value,
@@ -95,15 +98,17 @@ fun Login(navigateTo: (route: String) -> Unit) {
             )
 
 
+            // call view model for login
+            // check whether this user exists already in appwrite or not
+            // if new user create new user else login
+            coroutineScope.launch {
+                viewModel.login(userModel)
+            }
         }
-        // call view model for login
-        // check whether this user exists already in appwrite or not
-        // if new user create new user else login
 
 
     }
     //endregion
-
 
     Column(
         modifier = Modifier
@@ -228,7 +233,7 @@ fun Login(navigateTo: (route: String) -> Unit) {
                     .padding(20.dp)
 
             ) {
-                
+
                 Text(
                     text = stringResource(R.string.str_lable_login_signup),
                     modifier = Modifier.padding(top = 5.dp),
@@ -252,7 +257,7 @@ fun Login(navigateTo: (route: String) -> Unit) {
                     placeHolder = "Enter Email",
                     value = userEmail.value,
                     onValueChange = { userEmail.value = it },
-                    onErrorChange = { emailError.value = it}
+                    onErrorChange = { emailError.value = it }
                 )
 
                 Spacer(modifier = Modifier.padding(10.dp))
@@ -264,7 +269,7 @@ fun Login(navigateTo: (route: String) -> Unit) {
                     onErrorChange = {
                         passwordError.value = it
                     }
-                    )
+                )
 
                 Spacer(modifier = Modifier.padding(12.dp))
                 Button(

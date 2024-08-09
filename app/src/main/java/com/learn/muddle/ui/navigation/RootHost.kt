@@ -1,10 +1,12 @@
 package com.learn.muddle.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.learn.muddle.ui.presentation.authentication.login.Login
+import com.learn.muddle.ui.presentation.authentication.login.LoginViewModel
 import com.learn.muddle.ui.presentation.authentication.signup.SignUp
 import com.learn.muddle.ui.presentation.onboarding.OnboardingScreen
 
@@ -20,7 +22,9 @@ fun RootHost(){
         }
 
         composable(route = Screens.LoginScreen.route){
-            Login{
+            val loginViewModel = hiltViewModel<LoginViewModel>()
+
+            Login(loginViewModel){
                 navController.navigate(it)
             }
         }
