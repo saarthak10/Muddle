@@ -27,11 +27,11 @@ object LoginModule {
     }
 
 
-//    @Provides
-//    @Singleton
-//    fun provideLoginRepository( appwrite: Appwrite):LoginRepository{
-//        return LoginRepositoryImpl(appwrite)
-//
-//    }
+    @Provides
+    @Singleton
+    fun provideLoginRepository( ):LoginRepository{
+        return LoginRepositoryImpl()
+
+    }
 
 }

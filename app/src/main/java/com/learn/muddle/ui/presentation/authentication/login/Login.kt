@@ -34,6 +34,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.learn.muddle.R
 import com.learn.muddle.domain.model.UserModel
 import com.learn.muddle.ui.components.textfields.CommonTextField
@@ -43,7 +44,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun Login( viewModel: LoginViewModel,navigateTo: (route: String) -> Unit) {
+fun Login( loginViewModel: LoginViewModel = hiltViewModel(),navigateTo: (route: String) -> Unit) {
 
 
     val userName = remember {
@@ -102,7 +103,7 @@ fun Login( viewModel: LoginViewModel,navigateTo: (route: String) -> Unit) {
             // check whether this user exists already in appwrite or not
             // if new user create new user else login
             coroutineScope.launch {
-                viewModel.login(userModel)
+               // viewModel.login(userModel)
             }
         }
 

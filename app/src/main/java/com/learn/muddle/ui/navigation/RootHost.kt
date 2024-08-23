@@ -22,9 +22,9 @@ fun RootHost(){
         }
 
         composable(route = Screens.LoginScreen.route){
-            val loginViewModel = hiltViewModel<LoginViewModel>()
 
-            Login(loginViewModel){
+
+            Login(){
                 navController.navigate(it)
             }
         }

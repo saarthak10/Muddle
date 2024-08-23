@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -69,7 +71,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.dagger.hilt)
-    implementation(libs.dagger.hilt.compiler)
+    kapt(libs.dagger.hilt.compiler)
     implementation(libs.splash)
     implementation(libs.navgraph)
     implementation(libs.hilt.navigation)
